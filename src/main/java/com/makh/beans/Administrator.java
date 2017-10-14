@@ -1,9 +1,11 @@
 package com.makh.beans;// Created by on 08.10.2017.
 
+import com.makh.dao.Identificator;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class Administrator extends User {
+public class Administrator extends User implements Identificator<Integer> {
     private int id;
     private String email;
     private String phoneNumber;
