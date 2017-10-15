@@ -41,7 +41,7 @@ public class MySqlAdministratorDao extends AbstractDao<Administrator, Integer> {
 
     @Override
     public String getDeleteQuery() {
-        return "DELETE * FROM Administrators JOIN Users USING(login) " +
+        return "DELETE Administrators,Users FROM Administrators JOIN Users USING(login) " +
                 "WHERE id=?;";
     }
 
