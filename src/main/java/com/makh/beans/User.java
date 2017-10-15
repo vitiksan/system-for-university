@@ -76,12 +76,46 @@ public class User extends Person{
         this.state = state;
     }
 
+    public void setState(String state){
+        switch (state){
+            case "NEW":
+                this.state = UserState.NEW;
+                break;
+            case "ACTIVE":
+                this.state = UserState.ACTIVE;
+                break;
+            case "BLOCKED":
+                this.state = UserState.BLOCKED;
+                break;
+            case "BANNED":
+                this.state = UserState.BANNED;
+                break;
+        }
+    }
+
     public UserGroup getGroup() {
         return group;
     }
 
     public void setGroup(UserGroup group) {
         this.group = group;
+    }
+
+    public void setGroup(String group){
+        switch (group){
+            case "ADMINISTRATOR":
+                this.group = UserGroup.ADMINISTRATOR;
+                break;
+            case "TEACHER":
+                this.group = UserGroup.TEACHER;
+                break;
+            case "STUDENT":
+                this.group = UserGroup.STUDENT;
+                break;
+            case "MODERATOR":
+                this.group = UserGroup.MODERATOR;
+                break;
+        }
     }
 
     public LocalDateTime getCreated() {

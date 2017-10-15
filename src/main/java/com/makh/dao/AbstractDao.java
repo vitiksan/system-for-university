@@ -46,10 +46,11 @@ public abstract class AbstractDao<T extends Identificator<PK>, PK extends Serial
             throw new DaoException(e);
         }
 
-        query = getSelectQuery() + "(SELECT last_insert_id());";
+        query = getSelectQuery();
         ArrayList<T> someList;
 
         try (PreparedStatement prSt = connection.prepareStatement(query)) {
+            prSt.setString(1,"(SELECT last_insert_id())");
             ResultSet rs = prSt.executeQuery();
             someList = parsData(rs);
             if (someList == null || someList.size() != 1)
@@ -65,7 +66,7 @@ public abstract class AbstractDao<T extends Identificator<PK>, PK extends Serial
     @Override
     public T read(int id) throws DaoException {
         ArrayList<T> someList;
-        String query = getSelectQuery() + "?;";
+        String query = getSelectQuery();
         try (PreparedStatement prSt = connection.prepareStatement(query)) {
             prSt.setInt(1, id);
             ResultSet rs = prSt.executeQuery();
