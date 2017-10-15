@@ -14,12 +14,12 @@ public class MySqlAdministratorDao extends AbstractDao<Administrator, Integer> {
 
     @Override
     public String getSelectQuery() {
-        return "SELECT * FROM Administrators JOIN Users WHERE id=?;";
+        return "SELECT * FROM Administrators JOIN Users USING(login) WHERE id=?;";
     }
 
     @Override
     public String getSelectAllQuery() {
-        return "SELECT * FROM Administrators JOIN Users;";
+        return "SELECT * FROM Administrators JOIN Users USING(login);";
     }
 
     @Override
@@ -58,6 +58,7 @@ public class MySqlAdministratorDao extends AbstractDao<Administrator, Integer> {
                 admin.setGroup(rs.getString("user_group"));
                 admin.setCreated(rs.getTimestamp("created").toLocalDateTime());
                 admin.setLastAccess(rs.getTimestamp("last_access").toLocalDateTime());
+                admin.setId(rs.getInt("id"));
                 admin.setName(rs.getString("name"));
                 admin.setSurname(rs.getString("surname"));
                 admin.setBirthday(rs.getDate("birthday").toLocalDate());
