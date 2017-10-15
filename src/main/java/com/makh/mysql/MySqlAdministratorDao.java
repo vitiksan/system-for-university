@@ -14,12 +14,12 @@ public class MySqlAdministratorDao extends AbstractDao<Administrator, Integer> {
 
     @Override
     public String getSelectQuery() {
-        return "SELECT * FROM Administrator JOIN Users WHERE id=?;";
+        return "SELECT * FROM Administrators JOIN Users WHERE id=?;";
     }
 
     @Override
     public String getSelectAllQuery() {
-        return "SELECT * FROM Administrator JOIN Users;";
+        return "SELECT * FROM Administrators JOIN Users;";
     }
 
     @Override
@@ -32,9 +32,9 @@ public class MySqlAdministratorDao extends AbstractDao<Administrator, Integer> {
     @Override
     public String getCreateQuery() {
         return "BEGIN;" +
-                "INSERT INTO Users (login,password,user_state,user_group,created,last_access)" +
-                "VALUE(?,?,?,?,NOW(),NOW());" +
-                "INSERT INTO Administrators (name, surname, birthday,email,phone_number,login)" +
+                "INSERT INTO Users(login,password,user_state,user_group,created,last_access) " +
+                "VALUES(?,?,?,?,NOW(),NOW());" +
+                "INSERT INTO Administrators (name, surname, birthday,email,phone_number,login) " +
                 "VALUES(?,?,?,?,?,?);" +
                 "COMMIT;";
     }
