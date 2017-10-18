@@ -31,18 +31,13 @@ public class MySqlAdministratorDao extends AbstractDao<Administrator, Integer> {
 
     @Override
     public String getCreateQuery() {
-        return "BEGIN;" +
-                "INSERT INTO Users(login,password,user_state,user_group,created,last_access) " +
-                "VALUES(?,?,?,?,NOW(),NOW());" +
-                "INSERT INTO Administrators (name, surname, birthday,email,phone_number,login) " +
-                "VALUES(?,?,?,?,?,?);" +
-                "COMMIT;";
+        return "INSERT INTO Administrators (name, surname, birthday, email, phone_number, login) " +
+                "VALUES(?,?,?,?,?,?);";
     }
 
     @Override
     public String getDeleteQuery() {
-        return "DELETE Administrators,Users FROM Administrators JOIN Users USING(login) " +
-                "WHERE id=?;";
+        return "DELETE Administrators WHERE id=?;";
     }
 
     @Override
