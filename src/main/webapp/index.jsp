@@ -14,6 +14,7 @@
 <div align="center">
     <h2><a style="text-decoration: none; margin: 5px" href="/LoginServlet">Sign in</a>
         <a style="text-decoration: none; margin: 5px" href="/registration.html">Sign up</a>
+        <a style="text-decoration: none; margin: 5px" href="view-users.jsp">View users</a>
     </h2>
 </div>
 <hr>
