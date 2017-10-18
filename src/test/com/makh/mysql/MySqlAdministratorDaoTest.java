@@ -7,6 +7,7 @@ import com.makh.dao.AbstractDao;
 import com.makh.dao.DaoFactory;
 import org.junit.Test;
 
+import java.sql.Connection;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class MySqlAdministratorDaoTest {
     @Test
     public void create() throws Exception {
         Administrator administrator = new Administrator();
-        administrator.setLogin("atrik");
+        administrator.setLogin("vitiksan");
         administrator.setPassword("1234");
         administrator.setState(UserState.NEW);
         administrator.setGroup(UserGroup.ADMINISTRATOR);
@@ -31,8 +32,10 @@ public class MySqlAdministratorDaoTest {
         administrator.setPhoneNumber("+3076593524");
 
         DaoFactory factory = new MySqlDaoFactory();
+        MySqlUserDao userDao = new MySqlUserDao((Connection) factory.getConnection());
         AbstractDao dao = factory.getDao(factory.getConnection(), Administrator.class);
 
+        userDao.create(administrator);
         Administrator getAdmin = (Administrator) dao.create(administrator);
 
         System.out.println(getAdmin.toString());
@@ -43,7 +46,7 @@ public class MySqlAdministratorDaoTest {
         DaoFactory factory = new MySqlDaoFactory();
         AbstractDao dao = factory.getDao(factory.getConnection(), Administrator.class);
 
-        Administrator getAdmin = (Administrator) dao.read(4);
+        Administrator getAdmin = (Administrator) dao.read(1);
 
         System.out.println(getAdmin.toString());
     }
@@ -64,8 +67,8 @@ public class MySqlAdministratorDaoTest {
         DaoFactory factory = new MySqlDaoFactory();
         AbstractDao dao = factory.getDao(factory.getConnection(), Administrator.class);
 
-        Administrator getAdmin = (Administrator) dao.read(4);
-        getAdmin.setPhoneNumber("+305555555555");
+        Administrator getAdmin = (Administrator) dao.read(1);
+        getAdmin.setPhoneNumber("+305555554445");
         dao.update(getAdmin);
     }
 
@@ -74,7 +77,7 @@ public class MySqlAdministratorDaoTest {
         DaoFactory factory = new MySqlDaoFactory();
         AbstractDao dao = factory.getDao(factory.getConnection(), Administrator.class);
 
-        Administrator getAdmin = (Administrator) dao.read(7);
+        Administrator getAdmin = (Administrator) dao.read(1);
 
         dao.delete(getAdmin);
     }

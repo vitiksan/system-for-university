@@ -46,11 +46,10 @@ public abstract class AbstractDao<T extends Identificator<PK>, PK extends Serial
             throw new DaoException(e);
         }
 
-        query = getSelectQuery();
+        query = getSelectQuery() +"(SELECT last_insert_id());";
         ArrayList<T> someList;
 
         try (PreparedStatement prSt = connection.prepareStatement(query)) {
-            prSt.setString(1,"(SELECT last_insert_id())");
             ResultSet rs = prSt.executeQuery();
             someList = parsData(rs);
             if (someList == null || someList.size() != 1)
@@ -66,7 +65,7 @@ public abstract class AbstractDao<T extends Identificator<PK>, PK extends Serial
     @Override
     public T read(int id) throws DaoException {
         ArrayList<T> someList;
-        String query = getSelectQuery();
+        String query = getSelectQuery() +"?;";
         try (PreparedStatement prSt = connection.prepareStatement(query)) {
             prSt.setInt(1, id);
             ResultSet rs = prSt.executeQuery();
@@ -106,7 +105,7 @@ public abstract class AbstractDao<T extends Identificator<PK>, PK extends Serial
         try (PreparedStatement prSt = connection.prepareStatement(query)) {
             parsUpdate(prSt, obj);
             int count = prSt.executeUpdate();
-            if (count != 1) throw new DaoException("Error. Modified more then 1 field " + count);
+            if (count != 1 && count!=2) throw new DaoException("Error. Modified more then 1 field " + count);
             else return true;
         } catch (Exception e) {
             log.error("Error with update object" + e.getMessage());
@@ -120,11 +119,10 @@ public abstract class AbstractDao<T extends Identificator<PK>, PK extends Serial
 
         try (PreparedStatement prSt = connection.prepareStatement(query)) {
             try {
-                prSt.setObject(1, obj.getId());
+                prSt.setInt(1, obj.getId());
             } catch (Exception e) {
                 throw new DaoException(e);
             }
-
             int count = prSt.executeUpdate();
             if (count != 1) throw new DaoException("Error. Deleted more then 1 field " + count);
             else return true;

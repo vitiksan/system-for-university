@@ -14,7 +14,7 @@ public class MySqlAdministratorDao extends AbstractDao<Administrator, Integer> {
 
     @Override
     public String getSelectQuery() {
-        return "SELECT * FROM Administrators JOIN Users USING(login) WHERE id=?;";
+        return "SELECT * FROM Administrators JOIN Users USING(login) WHERE id=";
     }
 
     @Override
@@ -37,7 +37,7 @@ public class MySqlAdministratorDao extends AbstractDao<Administrator, Integer> {
 
     @Override
     public String getDeleteQuery() {
-        return "DELETE Administrators WHERE id=?;";
+        return "DELETE FROM Administrators WHERE id=?;";
     }
 
     @Override
@@ -90,16 +90,12 @@ public class MySqlAdministratorDao extends AbstractDao<Administrator, Integer> {
     @Override
     public void parsInsert(PreparedStatement prSt, Administrator obj) throws DaoException {
         try {
-            prSt.setString(1, obj.getLogin());
-            prSt.setString(2, obj.getPassword());
-            prSt.setString(3, String.valueOf(obj.getState()));
-            prSt.setString(4, String.valueOf(obj.getGroup()));
-            prSt.setString(5, obj.getName());
-            prSt.setString(6, obj.getSurname());
-            prSt.setDate(7, Date.valueOf(obj.getBirthday()));
-            prSt.setString(8, obj.getEmail());
-            prSt.setString(9, obj.getPhoneNumber());
-            prSt.setString(10, obj.getLogin());
+            prSt.setString(1, obj.getName());
+            prSt.setString(2, obj.getSurname());
+            prSt.setDate(3, Date.valueOf(obj.getBirthday()));
+            prSt.setString(4, obj.getEmail());
+            prSt.setString(5, obj.getPhoneNumber());
+            prSt.setString(6, obj.getLogin());
         } catch (SQLException e) {
             throw new DaoException();
         }
