@@ -1,0 +1,22 @@
+CREATE TABLE Users (
+login VARCHAR(8) UNIQUE NOT NULL,
+  password VARCHAR(20) NOT NULL,
+  user_state VARCHAR(15),
+  user_group VARCHAR(15),
+  created DATETIME NOT NULL,
+  last_access  DATETIME NOT NULL,
+  PRIMARY KEY (login)
+)ENGINE=InnoDB, CHARSET=UTF8;
+
+CREATE TABLE Administrators (
+  id INT(11) AUTO_INCREMENT,
+  name VARCHAR(15) NOT NULL,
+  surname VARCHAR(15) NOT NULL,
+  birthday DATE,
+  email VARCHAR(50),
+  phone_number VARCHAR(20),
+  login VARCHAR(8) UNIQUE NOT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT FOREIGN KEY (login) REFERENCES Users (login)
+  ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB, CHARSET=UTF8;

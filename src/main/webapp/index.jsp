@@ -9,15 +9,27 @@
 <html>
 <head>
     <title>Welcome page</title>
+    <link href="bootstrap/css/bootstrap.css">
+    <link href="./style.css" rel="stylesheet">
 </head>
-<body link="#00008b" vlink="#00008b" alink="#dc143c">
-<div align="center">
-    <h2><a style="text-decoration: none; margin: 5px" href="/LoginServlet">Sign in</a>
-        <a style="text-decoration: none; margin: 5px" href="/registration.html">Sign up</a>
-        <a style="text-decoration: none; margin: 5px" href="view-users.jsp">View users</a>
-    </h2>
+<body>
+<div class="wrapper container">
+    <header></header>
+    <nav class="navbar navbar-default">
+        <ul class="nav navbar-nav">
+            <li><a style="text-decoration: none; margin: 5px" href="/LoginServlet">Sign in</a></li>
+            <li><a style="text-decoration: none; margin: 5px" href="registration.html">Sign up</a></li>
+            <li><a style="text-decoration: none; margin: 5px" href="view-users.jsp">View users</a></li>
+        </ul>
+    </nav>
+    <div class="heading">
+        <h1 align="center">Welcome to our site</h1>
+    </div>
+    <div class="row">
+        <aside class="col-md-7"></aside>
+        <section class="col-md-17"></section>
+    </div>
 </div>
-<hr>
-<h1 align="center">Welcome to our site</h1>
+<footer></footer>
 </body>
 </html>
