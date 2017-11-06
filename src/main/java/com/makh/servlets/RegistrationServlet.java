@@ -35,9 +35,6 @@ public class RegistrationServlet extends HttpServlet {
         Administrator administrator = new Administrator();
         administrator.setLogin(login);
         administrator.setPassword(password);
-        administrator.setName(name);
-        administrator.setSurname(surname);
-        administrator.setBirthday(birthday);
         administrator.setEmail(email);
         administrator.setPhoneNumber(phoneNumber);
 

@@ -54,9 +54,6 @@ public class MySqlAdministratorDao extends AbstractDao<Administrator, Integer> {
                 admin.setCreated(rs.getTimestamp("created").toLocalDateTime());
                 admin.setLastAccess(rs.getTimestamp("last_access").toLocalDateTime());
                 admin.setId(rs.getInt("id"));
-                admin.setName(rs.getString("name"));
-                admin.setSurname(rs.getString("surname"));
-                admin.setBirthday(rs.getDate("birthday").toLocalDate());
                 admin.setEmail(rs.getString("email"));
                 admin.setPhoneNumber(rs.getString("phone_number"));
 
@@ -76,9 +73,6 @@ public class MySqlAdministratorDao extends AbstractDao<Administrator, Integer> {
             prSt.setString(3, String.valueOf(obj.getState()));
             prSt.setString(4, String.valueOf(obj.getGroup()));
             prSt.setTimestamp(5, Timestamp.valueOf(obj.getLastAccess()));
-            prSt.setString(6, obj.getName());
-            prSt.setString(7, obj.getSurname());
-            prSt.setDate(8, Date.valueOf(obj.getBirthday()));
             prSt.setString(9, obj.getEmail());
             prSt.setString(10, obj.getPhoneNumber());
             prSt.setInt(11, obj.getId());
@@ -90,9 +84,6 @@ public class MySqlAdministratorDao extends AbstractDao<Administrator, Integer> {
     @Override
     public void parsInsert(PreparedStatement prSt, Administrator obj) throws DaoException {
         try {
-            prSt.setString(1, obj.getName());
-            prSt.setString(2, obj.getSurname());
-            prSt.setDate(3, Date.valueOf(obj.getBirthday()));
             prSt.setString(4, obj.getEmail());
             prSt.setString(5, obj.getPhoneNumber());
             prSt.setString(6, obj.getLogin());
