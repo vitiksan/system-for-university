@@ -3,7 +3,6 @@ package com.makh.beans;
 import com.makh.dao.Identificator;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.TreeSet;
 
@@ -15,6 +14,37 @@ public class Group implements Identificator<Integer>{
     private LocalDate beganStudyDate;
     private HashSet<Student> members;
     private TreeSet<Class> classes;
+
+    public Group() {
+        this.id= 0;
+        this.groupCode = "";
+        this.specialty = "";
+        this.averageRating = 0;
+        this.beganStudyDate = LocalDate.now();
+        this.members = new HashSet<>();
+        this.classes = new TreeSet<>();
+    }
+
+    public Group(int id, String groupCode, String specialty, double averageRating, LocalDate beganStudyDate) {
+        this.id = id;
+        this.groupCode = groupCode;
+        this.specialty = specialty;
+        this.averageRating = averageRating;
+        this.beganStudyDate = beganStudyDate;
+        this.members = new HashSet<>();
+        this.classes = new TreeSet<>();
+    }
+
+    public Group(int id, String groupCode, String specialty, double averageRating,
+                 LocalDate beganStudyDate, HashSet<Student> members, TreeSet<Class> classes) {
+        this.id = id;
+        this.groupCode = groupCode;
+        this.specialty = specialty;
+        this.averageRating = averageRating;
+        this.beganStudyDate = beganStudyDate;
+        this.members = members;
+        this.classes = classes;
+    }
 
     @Override
     public int getId() {
@@ -71,5 +101,18 @@ public class Group implements Identificator<Integer>{
 
     public void setClasses(TreeSet<Class> classes) {
         this.classes = classes;
+    }
+
+    @Override
+    public String toString() {
+        return "Group{" +
+                "id=" + id +
+                ", groupCode='" + groupCode + '\'' +
+                ", specialty='" + specialty + '\'' +
+                ", averageRating=" + averageRating +
+                ", beganStudyDate=" + beganStudyDate +
+                ", members=" + members +
+                ", classes=" + classes +
+                '}';
     }
 }
