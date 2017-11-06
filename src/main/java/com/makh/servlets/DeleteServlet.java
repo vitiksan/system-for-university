@@ -17,10 +17,6 @@ import java.io.PrintWriter;
 // Created by on 14.10.2017.
 @WebServlet(name = "DeleteServlet")
 public class DeleteServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter writer = response.getWriter();

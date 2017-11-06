@@ -1,4 +1,4 @@
-package com.makh.beans;// Created by on 08.10.2017.
+package com.makh.beans;
 
 import java.time.LocalDate;
 
@@ -57,5 +57,4 @@ public class Person {
                 ", birthday=" + birthday +
                 '}';
     }
-
 }
