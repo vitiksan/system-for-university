@@ -17,29 +17,26 @@ public class Administrator extends User implements Identificator<Integer> {
         this.phoneNumber = "no-phone-number";
     }
 
-    public Administrator(String name, String surname,
-                         String login, String password,
+    public Administrator(String login, String password,
                          int id, String email, String phoneNumber) {
-        super(name, surname, login, password);
+        super(login, password);
         this.id = id;
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
 
-    public Administrator(String name, String surname, LocalDate birthday,
-                         String login, String password, UserState state, UserGroup group,
+    public Administrator(String login, String password, UserState state, UserGroup group,
                          int id, String email, String phoneNumber) {
-        super(name, surname, birthday, login, password, state, group);
+        super(login, password, state, group);
         this.id = id;
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
 
-    public Administrator(String name, String surname, LocalDate birthday,
-                         String login, String password, UserState state, UserGroup group,
+    public Administrator(String login, String password, UserState state, UserGroup group,
                          LocalDateTime created, LocalDateTime lastAccess,
                          int id, String email, String phoneNumber) {
-        super(name, surname, birthday, login, password, state, group, created, lastAccess);
+        super(login, password, state, group, created, lastAccess);
         this.id = id;
         this.email = email;
         this.phoneNumber = phoneNumber;

@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Teacher extends User implements Identificator<Integer> {
+public class Teacher extends Person implements Identificator<Integer> {
     private int id;
     private String academicStatus;
     private ArrayList<Class> classes;

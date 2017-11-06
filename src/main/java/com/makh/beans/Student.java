@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Student extends User implements Identificator<Integer> {
+public class Student extends Person implements Identificator<Integer> {
     private int id;
     private String email;
     private double averageRating;

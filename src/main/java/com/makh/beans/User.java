@@ -5,7 +5,7 @@ import com.makh.dao.Identificator;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public abstract class User extends Person implements Identificator<Integer> {
+public abstract class User implements Identificator<Integer> {
     private String login;
     private String password;
     private UserState state;
@@ -14,7 +14,6 @@ public abstract class User extends Person implements Identificator<Integer> {
     private LocalDateTime lastAccess;
 
     public User() {
-        super();
         this.login = "no-login";
         this.password = "no-password";
         this.state = UserState.NEW;
@@ -23,17 +22,14 @@ public abstract class User extends Person implements Identificator<Integer> {
         this.lastAccess = LocalDateTime.now();
     }
 
-    public User(String name, String surname, String login, String password) {
-        super(name, surname);
+    public User(String login, String password) {
         this.login = login;
         this.password = password;
         this.created = LocalDateTime.now();
         this.lastAccess = LocalDateTime.now();
     }
 
-    public User(String name, String surname, LocalDate birthday,
-                String login, String password, UserState state, UserGroup group) {
-        super(name, surname, birthday);
+    public User(String login, String password, UserState state, UserGroup group) {
         this.login = login;
         this.password = password;
         this.state = state;
@@ -42,10 +38,8 @@ public abstract class User extends Person implements Identificator<Integer> {
         this.lastAccess = LocalDateTime.now();
     }
 
-    public User(String name, String surname, LocalDate birthday,
-                String login, String password, UserState state, UserGroup group,
+    public User(String login, String password, UserState state, UserGroup group,
                 LocalDateTime created, LocalDateTime lastAccess) {
-        super(name, surname, birthday);
         this.login = login;
         this.password = password;
         this.state = state;

@@ -1,25 +1,39 @@
 package com.makh.beans;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-public class Person {
+public abstract class Person extends User {
     private String name;
     private String surname;
     private LocalDate birthday;
 
     public Person() {
+        super();
         this.name = "no-name";
         this.surname = "no-surname";
         this.birthday = LocalDate.now();
     }
 
-    public Person(String name, String surname) {
+    public Person(String name, String surname, String login, String password ) {
+        super(login, password);
         this.name = name;
         this.surname = surname;
         this.birthday = LocalDate.now();
     }
 
-    public Person(String name, String surname, LocalDate birthday) {
+    public Person(String name, String surname, LocalDate birthday,
+                  String login, String password, UserState state, UserGroup group) {
+        super(login, password, state, group);
+        this.name = name;
+        this.surname = surname;
+        this.birthday = birthday;
+    }
+
+    public Person(String name, String surname, LocalDate birthday,
+                  String login, String password, UserState state, UserGroup group,
+                  LocalDateTime created, LocalDateTime lastAccess) {
+        super(login, password, state, group, created, lastAccess);
         this.name = name;
         this.surname = surname;
         this.birthday = birthday;
