@@ -9,38 +9,43 @@ import java.util.ArrayList;
 public class Teacher extends Person implements Identificator<Integer> {
     private int id;
     private String academicStatus;
+    private LocalDate beganWork;
     private ArrayList<Class> classes;
 
     public Teacher() {
         super();
         this.id = 0;
-        this.academicStatus = "аспірант";
+        this.academicStatus = "aspirant";
+        beganWork = LocalDate.now();
         this.classes = new ArrayList<>();
     }
 
     public Teacher(String name, String surname, String login, String password,
-                   int id, String academicStatus, ArrayList<Class> classes) {
+                   int id, String academicStatus) {
         super(name, surname, login, password);
         this.id = id;
         this.academicStatus = academicStatus;
-        this.classes = classes;
+        beganWork = LocalDate.now();
+        this.classes = new ArrayList<>();
     }
 
     public Teacher(String name, String surname, LocalDate birthday, String login, String password,
                    UserState state, UserGroup group,
-                   int id, String academicStatus, ArrayList<Class> classes) {
+                   int id, String academicStatus, LocalDate beganWork, ArrayList<Class> classes) {
         super(name, surname, birthday, login, password, state, group);
         this.id = id;
         this.academicStatus = academicStatus;
+        this.beganWork = beganWork;
         this.classes = classes;
     }
 
     public Teacher(String name, String surname, LocalDate birthday, String login, String password,
                    UserState state, UserGroup group, LocalDateTime created, LocalDateTime lastAccess,
-                   int id, String academicStatus, ArrayList<Class> classes) {
+                   int id, String academicStatus, LocalDate beganWork, ArrayList<Class> classes) {
         super(name, surname, birthday, login, password, state, group, created, lastAccess);
         this.id = id;
         this.academicStatus = academicStatus;
+        this.beganWork = beganWork;
         this.classes = classes;
     }
 
@@ -61,11 +66,19 @@ public class Teacher extends Person implements Identificator<Integer> {
         this.academicStatus = academicStatus;
     }
 
-    public ArrayList<Class> getclasses() {
+    public LocalDate getBeganWork() {
+        return beganWork;
+    }
+
+    public void setBeganWork(LocalDate beganWork) {
+        this.beganWork = beganWork;
+    }
+
+    public ArrayList<Class> getClasses() {
         return classes;
     }
 
-    public void setclasses(ArrayList<Class> classes) {
+    public void setClasses(ArrayList<Class> classes) {
         this.classes = classes;
     }
 

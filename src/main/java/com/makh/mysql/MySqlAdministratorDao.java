@@ -26,12 +26,12 @@ public class MySqlAdministratorDao extends AbstractDao<Administrator, Integer> {
     public String getUpdateQuery() {
         return "UPDATE Administrators JOIN Users USING(login) " +
                 "SET login=?,password=?,user_state=?,user_group=?,last_access=?," +
-                "name=?,surname=?,birthday=?,email=?,phone_number=? WHERE id=?;";
+                "email=?,phone_number=? WHERE id=?;";
     }
 
     @Override
     public String getCreateQuery() {
-        return "INSERT INTO Administrators (name, surname, birthday, email, phone_number, login) " +
+        return "INSERT INTO Administrators (email, phone_number, login) " +
                 "VALUES(?,?,?,?,?,?);";
     }
 
@@ -73,9 +73,9 @@ public class MySqlAdministratorDao extends AbstractDao<Administrator, Integer> {
             prSt.setString(3, String.valueOf(obj.getState()));
             prSt.setString(4, String.valueOf(obj.getGroup()));
             prSt.setTimestamp(5, Timestamp.valueOf(obj.getLastAccess()));
-            prSt.setString(9, obj.getEmail());
-            prSt.setString(10, obj.getPhoneNumber());
-            prSt.setInt(11, obj.getId());
+            prSt.setString(6, obj.getEmail());
+            prSt.setString(7, obj.getPhoneNumber());
+            prSt.setInt(8, obj.getId());
         } catch (SQLException e) {
             throw new DaoException();
         }
@@ -84,9 +84,9 @@ public class MySqlAdministratorDao extends AbstractDao<Administrator, Integer> {
     @Override
     public void parsInsert(PreparedStatement prSt, Administrator obj) throws DaoException {
         try {
-            prSt.setString(4, obj.getEmail());
-            prSt.setString(5, obj.getPhoneNumber());
-            prSt.setString(6, obj.getLogin());
+            prSt.setString(1, obj.getEmail());
+            prSt.setString(2, obj.getPhoneNumber());
+            prSt.setString(3, obj.getLogin());
         } catch (SQLException e) {
             throw new DaoException();
         }

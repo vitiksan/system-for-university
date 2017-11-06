@@ -26,9 +26,6 @@ public class RegistrationServlet extends HttpServlet {
 
         String login = request.getParameter("login");
         String password = request.getParameter("password");
-        String name = request.getParameter("name");
-        String surname = request.getParameter("surname");
-        LocalDate birthday = LocalDate.parse(request.getParameter("birthday"));
         String email = request.getParameter("email");
         String phoneNumber = request.getParameter("phone-number");
 
@@ -63,19 +60,6 @@ public class RegistrationServlet extends HttpServlet {
                 "            <td>Password:</td>" +
                 "            <td>" + administrator.getPassword() + "</td>" +
                 "        </tr>" +
-                "        <tr>" +
-                "            <td>Name:</td>" +
-                "            <td>" + administrator.getName() + "</td>" +
-                "        </tr>" +
-                "        <tr>" +
-                "            <td>Surname:</td>" +
-                "            <td>" + administrator.getSurname() + "</td>" +
-                "        </tr>" +
-                "        <tr>" +
-                "            <td>Birthday:</td>" +
-                "            <td>" + administrator.getBirthday().toString() + "</td>" +
-                "        </tr>" +
-                "        <tr>" +
                 "            <td>Email:</td>" +
                 "            <td>" + administrator.getEmail() + "</td>" +
                 "        </tr>" +

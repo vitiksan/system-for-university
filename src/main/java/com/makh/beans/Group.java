@@ -9,7 +9,7 @@ import java.util.TreeSet;
 public class Group implements Identificator<Integer>{
     private int id;
     private String groupCode;
-    private String specialty;
+    private String speciality;
     private double averageRating;
     private LocalDate beganStudyDate;
     private HashSet<Student> members;
@@ -18,28 +18,28 @@ public class Group implements Identificator<Integer>{
     public Group() {
         this.id= 0;
         this.groupCode = "";
-        this.specialty = "";
+        this.speciality = "";
         this.averageRating = 0;
         this.beganStudyDate = LocalDate.now();
         this.members = new HashSet<>();
         this.classes = new TreeSet<>();
     }
 
-    public Group(int id, String groupCode, String specialty, double averageRating, LocalDate beganStudyDate) {
+    public Group(int id, String groupCode, String speciality, double averageRating, LocalDate beganStudyDate) {
         this.id = id;
         this.groupCode = groupCode;
-        this.specialty = specialty;
+        this.speciality = speciality;
         this.averageRating = averageRating;
         this.beganStudyDate = beganStudyDate;
         this.members = new HashSet<>();
         this.classes = new TreeSet<>();
     }
 
-    public Group(int id, String groupCode, String specialty, double averageRating,
+    public Group(int id, String groupCode, String speciality, double averageRating,
                  LocalDate beganStudyDate, HashSet<Student> members, TreeSet<Class> classes) {
         this.id = id;
         this.groupCode = groupCode;
-        this.specialty = specialty;
+        this.speciality = speciality;
         this.averageRating = averageRating;
         this.beganStudyDate = beganStudyDate;
         this.members = members;
@@ -63,12 +63,12 @@ public class Group implements Identificator<Integer>{
         this.groupCode = groupCode;
     }
 
-    public String getSpecialty() {
-        return specialty;
+    public String getSpeciality() {
+        return speciality;
     }
 
-    public void setSpecialty(String specialty) {
-        this.specialty = specialty;
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
     }
 
     public double getAverageRating() {
@@ -108,7 +108,7 @@ public class Group implements Identificator<Integer>{
         return "Group{" +
                 "id=" + id +
                 ", groupCode='" + groupCode + '\'' +
-                ", specialty='" + specialty + '\'' +
+                ", speciality='" + speciality + '\'' +
                 ", averageRating=" + averageRating +
                 ", beganStudyDate=" + beganStudyDate +
                 ", members=" + members +

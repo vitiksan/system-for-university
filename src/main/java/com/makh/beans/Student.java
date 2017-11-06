@@ -4,7 +4,6 @@ import com.makh.dao.Identificator;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 public class Student extends Person implements Identificator<Integer> {
     private int id;
@@ -65,6 +64,14 @@ public class Student extends Person implements Identificator<Integer> {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public double getAverageRating() {
+        return averageRating;
+    }
+
+    public void setAverageRating(double averageRating) {
+        this.averageRating = averageRating;
     }
 
     public int getGroupId() {
