@@ -32,7 +32,7 @@ public class MySqlAdministratorDao extends AbstractDao<Administrator, Integer> {
     @Override
     public String getCreateQuery() {
         return "INSERT INTO Administrators (email, phone_number, login) " +
-                "VALUES(?,?,?,?,?,?);";
+                "VALUES(?,?,?);";
     }
 
     @Override
