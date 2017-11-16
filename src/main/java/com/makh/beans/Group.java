@@ -13,7 +13,7 @@ public class Group implements Identificator<Integer>{
     private double averageRating;
     private LocalDate beganStudyDate;
     private HashSet<Student> members;
-    private TreeSet<Class> classes;
+    private TreeSet<Lesson> lessons;
 
     public Group() {
         this.id= 0;
@@ -22,7 +22,7 @@ public class Group implements Identificator<Integer>{
         this.averageRating = 0;
         this.beganStudyDate = LocalDate.now();
         this.members = new HashSet<>();
-        this.classes = new TreeSet<>();
+        this.lessons = new TreeSet<>();
     }
 
     public Group(int id, String groupCode, String speciality, double averageRating, LocalDate beganStudyDate) {
@@ -32,18 +32,18 @@ public class Group implements Identificator<Integer>{
         this.averageRating = averageRating;
         this.beganStudyDate = beganStudyDate;
         this.members = new HashSet<>();
-        this.classes = new TreeSet<>();
+        this.lessons = new TreeSet<>();
     }
 
     public Group(int id, String groupCode, String speciality, double averageRating,
-                 LocalDate beganStudyDate, HashSet<Student> members, TreeSet<Class> classes) {
+                 LocalDate beganStudyDate, HashSet<Student> members, TreeSet<Lesson> lessons) {
         this.id = id;
         this.groupCode = groupCode;
         this.speciality = speciality;
         this.averageRating = averageRating;
         this.beganStudyDate = beganStudyDate;
         this.members = members;
-        this.classes = classes;
+        this.lessons = lessons;
     }
 
     @Override
@@ -95,12 +95,12 @@ public class Group implements Identificator<Integer>{
         this.members = members;
     }
 
-    public TreeSet<Class> getClasses() {
-        return classes;
+    public TreeSet<Lesson> getLessons() {
+        return lessons;
     }
 
-    public void setClasses(TreeSet<Class> classes) {
-        this.classes = classes;
+    public void setLessons(TreeSet<Lesson> lessons) {
+        this.lessons = lessons;
     }
 
     @Override
@@ -112,7 +112,7 @@ public class Group implements Identificator<Integer>{
                 ", averageRating=" + averageRating +
                 ", beganStudyDate=" + beganStudyDate +
                 ", members=" + members +
-                ", classes=" + classes +
+                ", lessons=" + lessons +
                 '}';
     }
 }

@@ -10,14 +10,14 @@ public class Teacher extends Person implements Identificator<Integer> {
     private int id;
     private String academicStatus;
     private LocalDate beganWork;
-    private ArrayList<Class> classes;
+    private ArrayList<Lesson> lessons;
 
     public Teacher() {
         super();
         this.id = 0;
         this.academicStatus = "aspirant";
         beganWork = LocalDate.now();
-        this.classes = new ArrayList<>();
+        this.lessons = new ArrayList<>();
     }
 
     public Teacher(String name, String surname, String login, String password,
@@ -26,27 +26,27 @@ public class Teacher extends Person implements Identificator<Integer> {
         this.id = id;
         this.academicStatus = academicStatus;
         beganWork = LocalDate.now();
-        this.classes = new ArrayList<>();
+        this.lessons = new ArrayList<>();
     }
 
     public Teacher(String name, String surname, LocalDate birthday, String login, String password,
                    UserState state, UserGroup group,
-                   int id, String academicStatus, LocalDate beganWork, ArrayList<Class> classes) {
+                   int id, String academicStatus, LocalDate beganWork, ArrayList<Lesson> lessons) {
         super(name, surname, birthday, login, password, state, group);
         this.id = id;
         this.academicStatus = academicStatus;
         this.beganWork = beganWork;
-        this.classes = classes;
+        this.lessons = lessons;
     }
 
     public Teacher(String name, String surname, LocalDate birthday, String login, String password,
                    UserState state, UserGroup group, LocalDateTime created, LocalDateTime lastAccess,
-                   int id, String academicStatus, LocalDate beganWork, ArrayList<Class> classes) {
+                   int id, String academicStatus, LocalDate beganWork, ArrayList<Lesson> lessons) {
         super(name, surname, birthday, login, password, state, group, created, lastAccess);
         this.id = id;
         this.academicStatus = academicStatus;
         this.beganWork = beganWork;
-        this.classes = classes;
+        this.lessons = lessons;
     }
 
     @Override
@@ -74,12 +74,12 @@ public class Teacher extends Person implements Identificator<Integer> {
         this.beganWork = beganWork;
     }
 
-    public ArrayList<Class> getClasses() {
-        return classes;
+    public ArrayList<Lesson> getLessons() {
+        return lessons;
     }
 
-    public void setClasses(ArrayList<Class> classes) {
-        this.classes = classes;
+    public void setLessons(ArrayList<Lesson> lessons) {
+        this.lessons = lessons;
     }
 
     @Override
@@ -87,7 +87,7 @@ public class Teacher extends Person implements Identificator<Integer> {
         return "Teacher{" +
                 "id=" + id +
                 ", academicStatus='" + academicStatus + '\'' +
-                ", classes=" + classes +
+                ", lessons=" + lessons +
                 '}';
     }
 }
