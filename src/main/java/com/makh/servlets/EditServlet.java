@@ -34,9 +34,6 @@ public class EditServlet extends HttpServlet {
         administrator.setId(id);
         administrator.setLogin(login);
         administrator.setPassword(password);
-        administrator.setName(name);
-        administrator.setSurname(surname);
-        administrator.setBirthday(birthday);
         administrator.setEmail(email);
         administrator.setPhoneNumber(phoneNumber);
         administrator.setLastAccess(LocalDateTime.now());

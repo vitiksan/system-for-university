@@ -4,13 +4,7 @@
 <%@ page import="com.makh.dao.DaoFactory" %>
 <%@ page import="com.makh.mysql.MySqlDaoFactory" %>
 <%@ page import="com.makh.dao.AbstractDao" %>
-<%@ page import="com.makh.dao.DaoException" %><%--
-  Created by IntelliJ IDEA.
-  User: atrik
-  Date: 14.10.2017
-  Time: 22:49
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.makh.dao.DaoException" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

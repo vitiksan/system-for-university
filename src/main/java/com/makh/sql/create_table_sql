@@ -45,3 +45,168 @@ CREATE TABLE Groups(
   UNIQUE (group_code)
 )ENGINE=InnoDB, CHARSET=UTF8;
 
+CREATE TABLE Subjects(
+  id INT(11) AUTO_INCREMENT NOT NULL,
+  name VARCHAR(20) NOT NULL ,
+  academic_departmen VARCHAR(50) NOT NULL,
+  count_hours INT(11) NOT NULL,
+  count_credits INT(11) NOT NULL,
+  PRIMARY KEY(id)
+)ENGINE=InnoDB, CHARSET=UTF8;
+
+
+CREATE TABLE IF NOT EXISTS `servlab_devmax`.`Persons` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(20) NOT NULL,
+  `surname` VARCHAR(20) NOT NULL,
+  `birthday` DATE NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+
+
+
+
+
+
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+ALTER TABLE `servlab_devmax`.`Administrators`
+ADD INDEX `fk_Administrators_Users1_idx` (`Users_login` ASC),
+DROP INDEX `fk_Administrators_Users1_idx` ;
+
+ALTER TABLE `servlab_devmax`.`Groups`
+ADD INDEX `fk_Groups_Timetables1_idx` (`Timetables_id` ASC),
+DROP INDEX `fk_Groups_Timetables1_idx` ;
+
+ALTER TABLE `servlab_devmax`.`Students`
+ADD INDEX `fk_Students_Users1_idx` (`Users_login` ASC),
+ADD INDEX `fk_Students_Persons1_idx` (`Persons_id` ASC),
+DROP INDEX `fk_Students_Persons1_idx` ,
+DROP INDEX `fk_Students_Users1_idx` ;
+
+ALTER TABLE `servlab_devmax`.`Users`
+ADD INDEX `fk_Users_States1_idx` (`States_id` ASC),
+ADD INDEX `fk_Users_User_groups1_idx` (`User_groups_id` ASC),
+DROP INDEX `fk_Users_User_groups1_idx` ,
+DROP INDEX `fk_Users_States1_idx` ;
+
+ALTER TABLE `servlab_devmax`.`States`
+CHANGE COLUMN `id` `id` INT(11) NOT NULL AUTO_INCREMENT ;
+
+CREATE TABLE IF NOT EXISTS `servlab_devmax`.`Teachers` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `academic_status` VARCHAR(45) NULL DEFAULT NULL,
+  `began_work` DATE NOT NULL,
+  `Users_login` VARCHAR(8) NOT NULL,
+  `Timetables_id` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_Teachers_Users1_idx` (`Users_login` ASC),
+  INDEX `fk_Teachers_Timetables1_idx` (`Timetables_id` ASC),
+  CONSTRAINT `fk_Teachers_Users1`
+    FOREIGN KEY (`Users_login`)
+    REFERENCES `servlab_devmax`.`Users` (`login`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Teachers_Timetables1`
+    FOREIGN KEY (`Timetables_id`)
+    REFERENCES `servlab_devmax`.`Timetables` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `servlab_devmax`.`Timetables` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `servlab_devmax`.`Lesson_Types` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `type` VARCHAR(20) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `servlab_devmax`.`Lessons` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `start_time` TIME NOT NULL,
+  `end_time` TIME NOT NULL,
+  `day_of_week` VARCHAR(15) NOT NULL,
+  `is_paired` INT(1) NOT NULL,
+  `number_of_class` INT(11) NOT NULL,
+  `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `Lesson_Types_id` INT(11) NOT NULL,
+  `Subjects_id` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_Lessons_Lesson_Types1_idx` (`Lesson_Types_id` ASC),
+  INDEX `fk_Lessons_Subjects1_idx` (`Subjects_id` ASC),
+  CONSTRAINT `fk_Lessons_Lesson_Types1`
+    FOREIGN KEY (`Lesson_Types_id`)
+    REFERENCES `servlab_devmax`.`Lesson_Types` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Lessons_Subjects1`
+    FOREIGN KEY (`Subjects_id`)
+    REFERENCES `servlab_devmax`.`Subjects` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `servlab_devmax`.`Lessons_has_Timetables` (
+  `Lessons_id` INT(11) NOT NULL,
+  `Timetables_id` INT(11) NOT NULL,
+  PRIMARY KEY (`Lessons_id`, `Timetables_id`),
+  INDEX `fk_Lessons_has_Timetables_Timetables1_idx` (`Timetables_id` ASC),
+  INDEX `fk_Lessons_has_Timetables_Lessons1_idx` (`Lessons_id` ASC),
+  CONSTRAINT `fk_Lessons_has_Timetables_Lessons1`
+    FOREIGN KEY (`Lessons_id`)
+    REFERENCES `servlab_devmax`.`Lessons` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Lessons_has_Timetables_Timetables1`
+    FOREIGN KEY (`Timetables_id`)
+    REFERENCES `servlab_devmax`.`Timetables` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+ALTER TABLE `servlab_devmax`.`Groups`
+ADD CONSTRAINT `fk_Groups_Timetables1`
+  FOREIGN KEY (`Timetables_id`)
+  REFERENCES `servlab_devmax`.`Timetables` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+ALTER TABLE `servlab_devmax`.`Students`
+ADD CONSTRAINT `fk_Students_Users1`
+  FOREIGN KEY (`Users_login`)
+  REFERENCES `servlab_devmax`.`Users` (`login`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+ALTER TABLE `servlab_devmax`.`Users`
+ADD CONSTRAINT `fk_Users_States1`
+  FOREIGN KEY (`States_id`)
+  REFERENCES `servlab_devmax`.`States` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD CONSTRAINT `fk_Users_User_groups1`
+  FOREIGN KEY (`User_groups_id`)
+  REFERENCES `servlab_devmax`.`User_groups` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

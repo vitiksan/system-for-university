@@ -2,7 +2,10 @@ package com.makh.beans;
 
 import com.makh.dao.Identificator;
 
+import java.time.DayOfWeek;
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.Period;
 
 public class Lesson implements Identificator<Integer> {
     private int id;
@@ -10,6 +13,8 @@ public class Lesson implements Identificator<Integer> {
     private LessonType type;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
+    private DayOfWeek day;
+    private boolean isPaired;
     private int numberOfClass;
     private int teacherId;
     private int groupId;

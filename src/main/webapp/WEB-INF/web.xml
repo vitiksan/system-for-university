@@ -16,15 +16,6 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>ProfileServlet</servlet-name>
-    <servlet-class>com.makh.servlets.ProfileServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ProfileServlet</servlet-name>
-    <url-pattern>/ProfileServlet</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
     <servlet-name>LogoutServlet</servlet-name>
     <servlet-class>com.makh.servlets.LogoutServlet</servlet-class>
   </servlet>

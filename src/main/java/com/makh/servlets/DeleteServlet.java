@@ -29,7 +29,6 @@ public class DeleteServlet extends HttpServlet {
             AbstractDao dao = factory.getDao(factory.getConnection(), Administrator.class);
             Administrator user = (Administrator) dao.read(id);
             dao.delete(user);
-            writer.print("User " + user.getName() + " " + user.getSurname() + " deleted");
             request.getRequestDispatcher("view-users.jsp").include(request,response);
         } catch (DaoException e) {
 

@@ -1,8 +1,11 @@
 package com.makh.servlets;
 
-import org.apache.commons.codec.digest.DigestUtils;
+import com.makh.beans.Administrator;
+import com.makh.dao.AbstractDao;
+import com.makh.dao.DaoException;
+import com.makh.dao.DaoFactory;
+import com.makh.mysql.MySqlDaoFactory;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 
 // Created by on 17.09.2017.
 @WebServlet(name = "LoginServlet")
@@ -20,16 +24,26 @@ public class LoginServlet extends HttpServlet {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
 
-        ServletContext context = getServletContext();
+        Administrator admin = null;
+        try {
+            DaoFactory factory = new MySqlDaoFactory();
+            AbstractDao dao = factory.getDao(factory.getConnection(), Administrator.class);
 
-        if (login.equals(context.getInitParameter("login"))
-                && password.equals(context.getInitParameter("password"))) {
+            ArrayList<Administrator> administrators = dao.readAll();
+
+            for (Administrator current : administrators) {
+                if (current.getLogin().equals(login) && current.getPassword().equals(password)) {
+                    admin = current;
+                }
+            }
+        } catch (DaoException e) {
+            e.printStackTrace();
+        }
+
+        if (admin != null) {
             HttpSession session = request.getSession();
-            session.setAttribute("login", DigestUtils.md5Hex(login));
-            session.setAttribute("password", DigestUtils.md5Hex(password));
-            response.sendRedirect("/ProfileServlet");
-        } else {
-            // тут буде логування
+            session.setAttribute("admin", admin);
+            request.getRequestDispatcher("profile.jsp").forward(request, response);
         }
     }
 
