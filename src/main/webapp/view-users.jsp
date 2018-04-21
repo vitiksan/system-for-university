@@ -27,6 +27,8 @@
         //from servlet redirect to html page and return on post method servlet
         //and than return on view page
     }
+
+
 %>
 </body>
 </html>
